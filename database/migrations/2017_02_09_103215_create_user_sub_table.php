@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePasswordResetsTable extends Migration
+class CreateUserSubTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,19 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
+        //
+        Schema::create('user_sub' , function( Blueprint $table ) {
             $table->engine = 'InnoDB';
 
-            $table->integer('user_uid')->unsigned()->index();
-            $table->string('token')->index();
-            $table->timestamp('created_at')->nullable();
+            $table->increments('user_sub_idx');
+            $table->integer('user_uid')->unsigned();
+            $table->enum('user_sex' , [ 'M' , 'W' ])->nullable();
+            $table->enum('user_age' , [ 10 , 20 , 30 , 40 , 50 , 60])->nullable();
 
             $table->foreign('user_uid')
                   ->references('user_uid')->on('users')
                   ->onDelete('cascade');
+
         });
     }
 
@@ -33,6 +36,7 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('password_resets');
+        //
+        Schema::dropIfExists('user_sub');
     }
 }
