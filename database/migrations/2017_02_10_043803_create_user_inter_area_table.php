@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserSubTable extends Migration
+class CreateUserInterAreaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,18 +14,18 @@ class CreateUserSubTable extends Migration
     public function up()
     {
         //
-        Schema::create('user_sub' , function( Blueprint $table ) {
+        Schema::create('user_inter_area' , function( Blueprint $table ) {
             $table->engine = 'InnoDB';
 
-            $table->increments('user_sub_idx');
+            $table->increments('user_inter_area_idx');
             $table->integer('user_uid')->unsigned()->index();;
-            $table->enum('user_sex' , [ 'M' , 'W' ])->nullable();
-            $table->enum('user_age' , [ 10 , 20 , 30 , 40 , 50 , 60])->nullable();
+            $table->integer('sort')->index();
+            $table->char('area_cd' , 8)->index();
             $table->timestamps();
 
             $table->foreign('user_uid')
-                  ->references('user_uid')->on('users')
-                  ->onDelete('cascade');
+                ->references('user_uid')->on('users')
+                ->onDelete('cascade');
 
         });
     }
@@ -38,6 +38,6 @@ class CreateUserSubTable extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('user_sub');
+        Schema::dropIfExists('user_inter_area');
     }
 }
