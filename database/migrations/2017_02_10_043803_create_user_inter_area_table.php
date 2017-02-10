@@ -27,6 +27,9 @@ class CreateUserInterAreaTable extends Migration
                 ->references('user_uid')->on('users')
                 ->onDelete('cascade');
 
+            $table->foreign('area_cd')
+                ->references('comm_cd')->on('common_cds');
+
         });
     }
 

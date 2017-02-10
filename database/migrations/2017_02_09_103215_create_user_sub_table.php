@@ -18,14 +18,20 @@ class CreateUserSubTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('user_sub_idx');
-            $table->integer('user_uid')->unsigned()->index();;
-            $table->enum('user_sex' , [ 'M' , 'W' ])->nullable();
-            $table->enum('user_age' , [ 10 , 20 , 30 , 40 , 50 , 60])->nullable();
+            $table->integer('user_uid')->unsigned()->index();
+            $table->char('user_sex_cd' , 8)->nullable();
+            $table->char('user_age_cd' , 8)->nullable();
             $table->timestamps();
 
             $table->foreign('user_uid')
                   ->references('user_uid')->on('users')
                   ->onDelete('cascade');
+
+            $table->foreign('user_sex_cd')
+                ->references('comm_cd')->on('common_cds');
+
+            $table->foreign('user_age_cd')
+                ->references('comm_cd')->on('common_cds');
 
         });
     }

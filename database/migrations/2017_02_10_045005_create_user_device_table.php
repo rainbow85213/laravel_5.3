@@ -30,6 +30,9 @@ class CreateUserDeviceTable extends Migration
                 ->references('user_uid')->on('users')
                 ->onDelete('cascade');
 
+            $table->foreign('user_device_type')
+                ->references('comm_cd')->on('common_cds');
+
         });
     }
 

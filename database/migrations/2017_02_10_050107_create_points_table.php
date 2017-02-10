@@ -33,6 +33,9 @@ class CreatePointsTable extends Migration
                 ->references('user_uid')->on('users')
                 ->onDelete('cascade');
 
+            $table->foreign('point_type')
+                ->references('comm_cd')->on('common_cds');
+
         });
     }
 

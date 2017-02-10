@@ -31,6 +31,9 @@ class CreateUserFileTable extends Migration
                 ->references('user_uid')->on('users')
                 ->onDelete('cascade');
 
+            $table->foreign('file_category_cd')
+                ->references('comm_cd')->on('common_cds');
+
         });
     }
 

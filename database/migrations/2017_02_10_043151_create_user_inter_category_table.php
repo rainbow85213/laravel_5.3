@@ -27,6 +27,9 @@ class CreateUserInterCategoryTable extends Migration
                 ->references('user_uid')->on('users')
                 ->onDelete('cascade');
 
+            $table->foreign('category_cd')
+                ->references('comm_cd')->on('common_cds');
+
         });
     }
 
