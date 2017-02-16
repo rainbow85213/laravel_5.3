@@ -24,7 +24,7 @@ class CreateUserFileTable extends Migration
             $table->integer('file_size');
             $table->string('file_rename' , 255);
             $table->string('file_url' , 500);
-            $table->char('file_category_cd' , 8)->nullable()->index();;
+            $table->char('file_category_cd' , 8)->nullable()->index();
             $table->timestamps();
 
             $table->foreign('user_uid')
